@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+</head>
+<body>
+    {% if messages %}
+        <table border="1">
+            <tr>
+                <th>Serial</th>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Delete button</th>
+                <th>Update button</th>
+            </tr>
+            {% for message in messages %}
+            <tr>
+                <td>{{ message[0] }}</td>  <!-- Email -->
+                <td>{{ message[1] }}</td>  <!-- Roll -->
+                <td>{{ message[2] }}</td>  <!-- Name -->
+                <td>{{ message[3] }}</td>  <!-- Email -->
+                <td>
+                    <!-- Delete button form -->
+                    <form action="{{ url_for('delete', id=message[0]) }}" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('update', id=message[0]) }}" method="GET">
+                        <button type="submit">update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No listings found.</p>
+    {% endif %}
+</body>
+</html>
